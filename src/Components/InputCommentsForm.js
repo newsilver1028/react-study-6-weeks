@@ -10,7 +10,7 @@ function CommentsForm() {
         <button>Tweet</button>
       </div>
     </form>
-    <RenderCommentsForm />
+    {/* <RenderCommentsForm /> */}
     </>
   )
 }
