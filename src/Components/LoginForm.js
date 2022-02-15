@@ -1,41 +1,39 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
+
+import { visitor, reducer } from '../Reducer/LoginReducer';
 
 function LoginForm() {
-  const [loginState, setLoginState] = useState({
-    isLogined: false,
-    userName: ""
-  });
-  const LoginText = loginState.isLogined ? "logout" : "login";
+  const [loginState, dispatch] = useReducer(reducer,visitor);
+  const loginText = loginState.isLogined ? "logout" : "login";
 
-  function onChangeInputHandler(e) {
-    const temp = {
-      ...loginState,
-      userName: e.target.value
-    }
-    setLoginState(temp);
+  const onChangeInputHandler = e => {
+    // dispatch({
+    //   name: e.target.value
+    // })
+    loginState.userName = e.target.value;
+    // 🚨 객체에 접근하여 상태를 변경해도 되는지 
   }
 
-  function onClickSubmitHandler(e) {
+  const onClickSubmitHandler = e => {
     e.preventDefault();
-    let loginObject = {};
+
     if (!loginState.isLogined) {
-      loginObject = {
-        ...loginState,
-        isLogined: true,
-      }
+      dispatch({
+        type: 'LOGIN',
+      })
     } else {
-      loginObject = {
-        isLogined: false,
-        userName: ""
-      }
+      dispatch({
+        type: 'LOGOUT',
+      })
     }
-    setLoginState(loginObject);
   }
 
+  const inputText = <input type="text" id="inputUserName" onChange={onChangeInputHandler}/>;
+  
   return (
     <form>
-    {loginState.isLogined ? loginState.userName : <input type="text" id="inputUserName" onChange={onChangeInputHandler}/>}
-    <button type="button" id="submitUserName" onClick={onClickSubmitHandler}>{LoginText}</button>
+      {loginState.isLogined ? loginState.userName : inputText}
+      <button type="button" id="submitUserName" onClick={onClickSubmitHandler}>{loginText}</button>
     </form>
   )
 }
