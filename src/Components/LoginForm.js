@@ -1,12 +1,13 @@
 import { useReducer } from 'react';
 
 import { visitor, reducer } from '../Reducer/LoginReducer';
+import CommentsForm from './CommentsForm';
 
 function LoginForm() {
   const [loginState, dispatch] = useReducer(reducer,visitor);
   const loginText = loginState.isLogined ? "logout" : "login";
 
-  const onChangeInputHandler = e => {
+  function onChangeInputHandler(e) {
     // dispatch({
     //   name: e.target.value
     // })
@@ -14,7 +15,7 @@ function LoginForm() {
     // 🚨 객체에 접근하여 상태를 변경해도 되는지 
   }
 
-  const onClickSubmitHandler = e => {
+  function onClickSubmitHandler(e) {
     e.preventDefault();
 
     if (!loginState.isLogined) {
@@ -31,10 +32,13 @@ function LoginForm() {
   const inputText = <input type="text" id="inputUserName" onChange={onChangeInputHandler}/>;
   
   return (
+    <>
     <form>
       {loginState.isLogined ? loginState.userName : inputText}
       <button type="button" id="submitUserName" onClick={onClickSubmitHandler}>{loginText}</button>
     </form>
+    <CommentsForm />
+    </>
   )
 }
 
