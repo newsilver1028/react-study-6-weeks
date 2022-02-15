@@ -5,6 +5,7 @@ function LoginForm() {
     isLogined: false,
     userName: ""
   });
+  const LoginText = loginState.isLogined ? "logout" : "login";
 
   function onChangeInputHandler(e) {
     const temp = {
@@ -16,24 +17,25 @@ function LoginForm() {
 
   function onClickSubmitHandler(e) {
     e.preventDefault();
-    // isLogined 체크
-    // const Logout = {
-    //   isLogined: false,
-    //   userName: ""
-    // }
-    // setLoginState(Logout);
-    // if() userName 체크
-    const Logined = {
-      ...loginState,
-      isLogined: true,
+    let loginObject = {};
+    if (!loginState.isLogined) {
+      loginObject = {
+        ...loginState,
+        isLogined: true,
+      }
+    } else {
+      loginObject = {
+        isLogined: false,
+        userName: ""
+      }
     }
-    setLoginState(Logined);
+    setLoginState(loginObject);
   }
 
   return (
     <form>
     {loginState.isLogined ? loginState.userName : <input type="text" id="inputUserName" onChange={onChangeInputHandler}/>}
-    <button type="button" id="submitUserName" onClick={onClickSubmitHandler}>{loginState.isLogined ? "logout" : "login"}</button>
+    <button type="button" id="submitUserName" onClick={onClickSubmitHandler}>{LoginText}</button>
     </form>
   )
 }
