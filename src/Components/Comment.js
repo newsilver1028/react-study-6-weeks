@@ -1,13 +1,12 @@
-function Comment() {
-  // userName은 상위 컴포넌트에서 provider로 받기.
-  // contents는 prop으로 받기.
-  // day는 해당 컴포넌트에서 만들기 
-
+function Comment(props) {
+  const userName = props.userName;
+  const content = props.content;
+  const date = props.date;
   return(
     <div>
-      <h1>username</h1>
-      <h4>contents</h4>
-      <span>day</span>
+      <h1>{userName}</h1>
+      <h4>{content}</h4>
+      <span>{date}</span>
     </div>
   )
 }

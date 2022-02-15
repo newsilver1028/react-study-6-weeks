@@ -30,14 +30,14 @@ function LoginForm() {
   }
 
   const inputText = <input type="text" id="inputUserName" onChange={onChangeInputHandler}/>;
-  
+  const commentsFormID = `${inputText}-comments-form`;
   return (
     <>
     <form>
       {loginState.isLogined ? loginState.userName : inputText}
       <button type="button" id="submitUserName" onClick={onClickSubmitHandler}>{loginText}</button>
     </form>
-    <CommentsForm />
+    <CommentsForm id={commentsFormID}/>
     </>
   )
 }
