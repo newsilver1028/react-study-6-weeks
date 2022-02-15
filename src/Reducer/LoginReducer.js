@@ -1,7 +1,7 @@
 const visitor = {
-    isLogined: false,
-    userName: ""
-  }
+  isLogined: false,
+  userName: ""
+}
 
 function reducer(state, action) {
   switch (action.type) {
