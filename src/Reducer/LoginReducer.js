@@ -18,6 +18,7 @@ function reducer(state, action) {
     default:
       return state;
   }
+  // default 대신 오류를 반환해야함.
 }
 
 export { visitor, reducer }

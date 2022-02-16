@@ -1,10 +1,19 @@
+import React from 'react';
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
+
 import Wrapper from "./Wrapper";
 
 function App() {
   return (
-    <div className="App">
+    <RecoilRoot>
       <Wrapper />
-    </div>
+    </RecoilRoot>
   );
 }
 

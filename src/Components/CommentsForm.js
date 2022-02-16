@@ -3,8 +3,7 @@ import { useState } from "react";
 import Comment from "./Comment";
 import { currentTime } from "../Function/currentTime";
 
-function CommentsForm() {
-  // const currentDate = 
+function CommentsForm(props) {
   const [comment, setComment] = useState({});
   const [addComment, setAddComment] = useState([]);
 
@@ -20,7 +19,7 @@ function CommentsForm() {
     e.preventDefault();
     const commentObject = {
       ...comment,
-      userName: "userName",
+      userName: props.userName,
       date: currentTime()
     }
     setComment(commentObject);    
