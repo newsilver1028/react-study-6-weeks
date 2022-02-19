@@ -8,7 +8,7 @@ function currentTime() {
   const minutes = ('0' + today.getMinutes()).slice(-2);
   const seconds = ('0' + today.getSeconds()).slice(-2); 
 
-  const dateString = `${year}.${month}.${day} ${hours}:${minutes}:${seconds}`
+  const dateString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
 
   return dateString;
 }

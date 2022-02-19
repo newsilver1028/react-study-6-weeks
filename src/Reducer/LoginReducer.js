@@ -13,7 +13,7 @@ function reducer(state, action) {
     case 'LOGOUT':
       return {
         isLogined: false,
-        userName: ''
+        userName: ""
       }
     default:
       return state;

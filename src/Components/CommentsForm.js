@@ -7,19 +7,12 @@ function CommentsForm(props) {
   const [comment, setComment] = useState({});
   const [addComment, setAddComment] = useState([]);
 
-  function onChangeInputHandler(e) {
-    const content = {
-      ...comment,
-      content: e.target.value
-    }
-    setComment(content);
-  }
-  
   function onClickSubmitHandler(e) {
     e.preventDefault();
+    const text = document.getElementById("input-comments").value;
     const commentObject = {
-      ...comment,
       userName: props.userName,
+      content: text,
       date: currentTime()
     }
     setComment(commentObject);    
@@ -31,8 +24,8 @@ function CommentsForm(props) {
     <>
     <form>
       <div>
-        <textarea id="inputComments" rows="5" cols="50" onChange={onChangeInputHandler}/>
-        <button id="submitComments" onClick={onClickSubmitHandler}>Tweet</button>
+        <textarea id="input-comments" rows="5" cols="50" />
+        <button id="submit-comments" onClick={onClickSubmitHandler}>Tweet</button>
       </div>
     </form>
     {addComment.map((element,index) => {

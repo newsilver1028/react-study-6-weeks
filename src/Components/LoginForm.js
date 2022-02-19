@@ -11,15 +11,12 @@ function LoginForm() {
   const setUserName = useSetRecoilState(userNameState);
   const loginText = loginState.isLogined ? "logout" : "login";
 
-  function onChangeInputHandler(e) {
-    // 🚨 객체에 접근하여 상태를 변경해도 되는지 
-    loginState.userName = e.target.value;
-    setUserName({ userName: e.target.value});
-  }
-
   function onClickSubmitHandler(e) {
     e.preventDefault();
     if (!loginState.isLogined) {
+      const text = document.getElementById("input-user-name").value;
+      loginState.userName = text;
+      setUserName({ userName: text});
       dispatch({
         type: 'LOGIN',
       })
@@ -31,13 +28,13 @@ function LoginForm() {
   }
   // logout일 때 CommentsForm에 포커스 방지.
 
-  const inputText = <input type="text" id="inputUserName" onChange={onChangeInputHandler}/>;
+  const inputText = <input type="text" id="input-user-name" />;
   const commentsFormID = `${inputText}-comments-form`;
   return (
     <>
     <form>
       {loginState.isLogined ? loginState.userName : inputText}
-      <button type="button" id="submitUserName" onClick={onClickSubmitHandler}>{loginText}</button>
+      <button type="button" id="submit-user-name" onClick={onClickSubmitHandler}>{loginText}</button>
     </form>
     {/* {loginState.isLogined && <CommentsForm id={commentsFormID}/>} */}
     <CommentsForm id={commentsFormID} userName={loginState.userName}/>
