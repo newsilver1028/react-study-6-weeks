@@ -1,10 +1,8 @@
-import { useEffect, useReducer, useRef, useState } from 'react';
+import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 
-import { visitor, reducer } from '../Reducer/LoginReducer';
 import CommentsForm from './CommentsForm';
-
 import { userNameState } from '../State/userNameState';
-import { selector, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 function LoginForm() {
   const setUserName = useSetRecoilState(userNameState);
@@ -47,7 +45,6 @@ function LoginForm() {
   // logout일 때 CommentsForm에 포커스 방지.
 
   const inputText = <input type="text" id="input-user-name" onChange={onChangeInputHandler}/>;
-  const commentsFormID = `${inputText}-comments-form`;
   const getUserName = window.localStorage.getItem("user-name");
 
   return (
@@ -62,7 +59,6 @@ function LoginForm() {
         {loginText}
       </button>
     </form>
-    {/* {loginState.isLogined && <CommentsForm id={commentsFormID}/>} */}
     <CommentsForm userName={state.userName}/>
     </>
   )
