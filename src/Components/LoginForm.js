@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 
 import CommentsForm from './CommentsForm';
@@ -8,52 +8,55 @@ import styles from './LoginForm.module.css';
 
 function LoginForm() {
   const setUserName = useSetRecoilState(userNameState);
+  const [input, setInput] = useState("");
   const [state, setState] = useState({
     isLogined: false,
     userName: ""
   });
   const loginText = state.isLogined ? "LOGOUT" : "LOGIN";
+  const getUserName = JSON.parse(window.localStorage.getItem("user-name"));
 
-  // 새로고침 시 데이터 유지하기
-  // useEffect(() => {
-  //   const temp = window.localStorage.setItem("user-name", JSON.stringify(loginState.userName));
-  //   if (temp) loginState.isLogined = true;
-  // }, []);
+  useEffect(() => {
+    const storedUserName = JSON.parse(window.localStorage.getItem("user-name"));
+    if (storedUserName) {
+      setState({
+        isLogined: true,
+        userName: storedUserName
+      });
+      setUserName(storedUserName);
+    }
+  },[state.userName]);
 
   function onChangeInputHandler(e) {
     const text = e.target.value;
-    setState({
-      ...state,
-      userName: text
-    });
-    setUserName({ userName: text });
+    setInput(text);
   }
 
   function onClickSubmitHandler(e) {
     e.preventDefault();
     if (!state.isLogined){
+      window.localStorage.setItem("user-name", JSON.stringify(input));
+      // const getUserName = JSON.parse(window.localStorage.getItem("user-name"));
       setState({
-      ...state,
-      isLogined: true,
-    });
-    return;
+        userName: getUserName,
+        isLogined: true,
+      });
+      setUserName(getUserName);
+      return;
     }
+    localStorage.removeItem("user-name");
     setState({
       isLogined: false,
       userName: ""
     });
   }
 
-  // logout일 때 CommentsForm에 포커스 방지.
-
   const inputText = <input type="text" className={styles.inputUserName} onChange={onChangeInputHandler}/>;
-  const getUserName = window.localStorage.getItem("user-name");
 
   return (
     <div className={styles.loginFormWrapper}>
     <form className={styles.loginForm}>
       {state.isLogined ? <h2 className={styles.loginedUser}>{state.userName}</h2> : inputText}
-      {/* {state.isLogined ? JSON.parse(getUserName) : inputText} */}
       <button 
         type="button" 
         className={styles.submitUserName} 

@@ -5,12 +5,12 @@ import styles from './Comment.module.css';
 
 function Comment(props) {
   const current = useRecoilValue(userNameState);
-  
+  console.log(current);
   const userName = props.userName;
   const content = props.content;
   const date = props.date;
   const onDelete = props.onClick;
-  const isAuthor = current.userName === userName;
+  const isAuthor = current === userName;
 
   return(
     <div id={userName+date} className={styles.commentsWrapper}>
