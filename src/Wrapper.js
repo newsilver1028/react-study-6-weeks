@@ -1,10 +1,12 @@
 import LoginForm from './Components/LoginForm';
 
+import styles from './Wrapper.module.css';
+
 function Wrapper() {
 return (
-    <>
-    <LoginForm />
-    </>
+    <div className={styles.wrapper}>
+      <LoginForm />
+    </div>
   )
 }
 

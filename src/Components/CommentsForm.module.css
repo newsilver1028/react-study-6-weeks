@@ -1,0 +1,52 @@
+.commentsFormWrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  width: 600px;
+  background-color: lightsteelblue;
+  border-radius: 10px;
+}
+
+.inputCommentsForm {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-content:space-around;
+  width: 600px;
+  margin: 120px auto;
+}
+
+.inputComments {
+  width: 300px;
+  margin: 0 20px;
+  border-style: none;
+  border: 1px solid lightslategray;
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.submitComments {
+  width: 80px;
+  height: 30px;
+  background-color:lightslategray;
+  border-style: none;
+  border-radius: 5px;
+  color: white;
+  border: 1px solid lightslategray;
+  font-family: monospace;
+  cursor: pointer;
+}
+
+.submitComments:hover {
+  background-color: transparent;
+}
+
+.inputComments:disabled {
+  background-color:lightgray;
+  border: 1px solid lightgray;
+}
+
+.submitComments:disabled {
+  background-color:lightgray;
+  border: 1px solid lightgray;
+}

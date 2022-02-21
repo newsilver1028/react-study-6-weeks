@@ -4,13 +4,15 @@ import { useSetRecoilState } from 'recoil';
 import CommentsForm from './CommentsForm';
 import { userNameState } from '../State/userNameState';
 
+import styles from './LoginForm.module.css';
+
 function LoginForm() {
   const setUserName = useSetRecoilState(userNameState);
   const [state, setState] = useState({
     isLogined: false,
     userName: ""
   });
-  const loginText = state.isLogined ? "logout" : "login";
+  const loginText = state.isLogined ? "LOGOUT" : "LOGIN";
 
   // 새로고침 시 데이터 유지하기
   // useEffect(() => {
@@ -44,23 +46,23 @@ function LoginForm() {
 
   // logout일 때 CommentsForm에 포커스 방지.
 
-  const inputText = <input type="text" id="input-user-name" onChange={onChangeInputHandler}/>;
+  const inputText = <input type="text" className={styles.inputUserName} onChange={onChangeInputHandler}/>;
   const getUserName = window.localStorage.getItem("user-name");
 
   return (
-    <>
-    <form>
-      {state.isLogined ? state.userName : inputText}
+    <div className={styles.loginFormWrapper}>
+    <form className={styles.loginForm}>
+      {state.isLogined ? <h2 className={styles.loginedUser}>{state.userName}</h2> : inputText}
       {/* {state.isLogined ? JSON.parse(getUserName) : inputText} */}
       <button 
         type="button" 
-        id="submit-user-name" 
+        className={styles.submitUserName} 
         onClick={onClickSubmitHandler}>
         {loginText}
       </button>
     </form>
-    <CommentsForm userName={state.userName}/>
-    </>
+    <CommentsForm isLogined={state.isLogined} userName={state.userName}/>
+    </div>
   )
 }
 

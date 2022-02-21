@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { currentTime } from '../Function/currentTime';
 import { userNameState } from '../State/userNameState';
+
+import styles from './Comment.module.css';
 
 function Comment(props) {
   const current = useRecoilValue(userNameState);
@@ -12,29 +12,16 @@ function Comment(props) {
   const onDelete = props.onClick;
   const isAuthor = current.userName === userName;
 
-  // function onClickDeleteHandler(e) {
-  //   const deleteTarget = e.target.parentNode;
-  //   deleteTarget.remove();
-  // }
-
-  // useEffect(() => {
-  //   const $comment = document.getElementById(date);
-  //   const commentedTime = new Date(date);
-  //   const deleteComment = setInterval(() => {
-  //     const time = new Date(currentTime());
-  //     if (time.getSeconds() - commentedTime.getSeconds() === 10) $comment.remove();
-  //   }, 1000);
-  //   return () => clearInterval(deleteComment);
-  // });
-  
-
   return(
-    <div id={userName+date}>
-      <h1>{userName}</h1>
-      <h4>{content}</h4>
-      <span>{date}</span>
+    <div id={userName+date} className={styles.commentsWrapper}>
+      <div className={styles.textWrapper}>
+        <span className={styles.userName}>USER 👤 - {userName}</span>
+        <h3>{content}</h3>
+        <span className={styles.date}>{date}</span>
+      </div>
       {isAuthor && <button 
       type="button" 
+      className={styles.deleteButton}
       onClick={onDelete}>
       Delete</button>}
     </div>

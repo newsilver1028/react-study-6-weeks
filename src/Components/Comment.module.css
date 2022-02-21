@@ -1,0 +1,40 @@
+.commentsWrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin: 20px auto;
+  width: 500px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.textWrapper{
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 30px auto;
+  text-align: center;
+  color: black;
+}
+
+.deleteButton {
+  width: 80px;
+  height: 30px;
+  margin: 50px;
+  background-color:lightslategray;
+  border-style: none;
+  border-radius: 5px;
+  color: white;
+  font-family: monospace;
+}
+
+.userName {
+  padding: 10px auto;
+  background-color:lightslategray;
+  border-radius: 5px;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.date {
+  color: lightslategray;
+}

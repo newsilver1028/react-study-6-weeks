@@ -3,7 +3,10 @@ import { useState, useEffect } from "react";
 import Comment from "./Comment";
 import { currentTime } from "../Function/currentTime";
 
+import styles from './CommentsForm.module.css';
+
 function CommentsForm(props) {
+  const isLogined = props.isLogined;
   const userName = props.userName;
 
   const [comment, setComment] = useState({
@@ -12,17 +15,17 @@ function CommentsForm(props) {
   });
   const [addComment, setAddComment] = useState([]);
 
-  useEffect(() => {
-    const time = new Date(currentTime());
-    const deleteComment = setInterval(() => {
-      const deletedCommentsArray = addComment.filter((comment) => {
-        const commentedTime = new Date(comment.date);
-        return time.getSeconds() - commentedTime.getSeconds() < 10
-      });
-      setAddComment(deletedCommentsArray);
-    }, 1000);
-    return () => clearInterval(deleteComment);
-  });
+  // useEffect(() => {
+  //   const time = new Date(currentTime());
+  //   const deleteComment = setInterval(() => {
+  //     const deletedCommentsArray = addComment.filter((comment) => {
+  //       const commentedTime = new Date(comment.date);
+  //       return time.getSeconds() - commentedTime.getSeconds() < 10
+  //     });
+  //     setAddComment(deletedCommentsArray);
+  //   }, 1000);
+  //   return () => clearInterval(deleteComment);
+  // });
 
   function onChangeInputHandler(e) {
     const text = e.target.value;
@@ -52,15 +55,22 @@ function CommentsForm(props) {
     })
     setAddComment(deletedArray);
   }
+  const disabledCommentsForm =
+    <form className={styles.inputCommentsForm}>
+      <textarea className={styles.inputComments} rows="5" cols="20" onChange={onChangeInputHandler} disabled/>
+      <button className={styles.submitComments} onClick={onClickSubmitHandler} disabled>Tweet</button>
+    </form>;
+  
+  const abledCommentsForm = 
+    <form className={styles.inputCommentsForm}>
+      <textarea className={styles.inputComments} rows="5" cols="20" onChange={onChangeInputHandler}/>
+      <button className={styles.submitComments} onClick={onClickSubmitHandler}>Tweet</button>
+    </form>
 
   return(
     <>
-    <form>
-      <div>
-        <textarea id="input-comments" rows="5" cols="50" onChange={onChangeInputHandler}/>
-        <button id="submit-comments" onClick={onClickSubmitHandler}>Tweet</button>
-      </div>
-    </form>
+    {isLogined ? abledCommentsForm : disabledCommentsForm}
+    <div className={styles.commentsFormWrapper}>
     {addComment.map((element,index) => {
       return <Comment 
         userName={element.userName} 
@@ -70,6 +80,7 @@ function CommentsForm(props) {
         onClick={onClickDeleteHandler}
         />
     })}
+    </div>
     </>
   )
 }

@@ -1,0 +1,51 @@
+.loginFormWrapper {
+  width: 600px;
+  height: 300px;
+  background-color: lightsteelblue;
+  border-radius: 10px;
+}
+
+.loginForm{
+  width: 600px;
+  height: 30px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-content: space-between;
+  width: 300px;
+  margin: 40px auto;
+}
+
+.inputUserName{
+  width: 200px;
+  height: 30px;
+  margin: 20px;
+  border-style: none;
+  border-bottom: 1px solid lightslategray;
+  background-color: transparent;
+}
+
+.submitUserName{
+  width: 80px;
+  height: 30px;
+  margin: 20px;
+  background-color:lightslategray;
+  border-style: none;
+  border-radius: 5px;
+  border: 1px solid lightslategray;
+  color: white;
+  font-family: monospace;
+  cursor: pointer;
+}
+
+.submitUserName:hover {
+  background-color: transparent;
+}
+
+.loginedUser {
+  width: 200px;
+  height: 30px;
+  margin: 20px;
+  text-align: center;
+  color: white;
+}
