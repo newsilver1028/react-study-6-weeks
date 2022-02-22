@@ -36,7 +36,6 @@ function LoginForm() {
     e.preventDefault();
     if (!state.isLogined){
       window.localStorage.setItem("user-name", JSON.stringify(input));
-      // const getUserName = JSON.parse(window.localStorage.getItem("user-name"));
       setState({
         userName: getUserName,
         isLogined: true,

@@ -15,22 +15,21 @@ function CommentsForm(props) {
   });
   const [addComment, setAddComment] = useState([]);
 
-  // useEffect(() => {
-  //   const time = new Date(currentTime());
-  //   const deleteComment = setInterval(() => {
-  //     const deletedCommentsArray = addComment.filter((comment) => {
-  //       const commentedTime = new Date(comment.date);
-  //       return time.getSeconds() - commentedTime.getSeconds() < 10
-  //     });
-  //     setAddComment(deletedCommentsArray);
-  //   }, 1000);
-  //   return () => clearInterval(deleteComment);
-  // });
+  useEffect(() => {
+    const time = new Date(currentTime());
+    const deleteComment = setInterval(() => {
+      const deletedCommentsArray = addComment.filter((comment) => {
+        const commentedTime = new Date(comment.date);
+        return time.getSeconds() - commentedTime.getSeconds() < 30
+      });
+      setAddComment(deletedCommentsArray);
+    }, 1000);
+    return () => clearInterval(deleteComment);
+  });
 
   function onChangeInputHandler(e) {
     const text = e.target.value;
     setComment({
-      ...comment,
       userName: userName,
       content: text,
     });
@@ -51,7 +50,7 @@ function CommentsForm(props) {
     const deleteTarget = e.target.parentNode;
     const deleteTargetId = deleteTarget.id;
     const deletedArray = addComment.filter(element => {
-      return element.id !== deleteTargetId
+      return element.id !== deleteTargetId;
     })
     setAddComment(deletedArray);
   }
