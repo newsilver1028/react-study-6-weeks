@@ -11,7 +11,6 @@ function commentReducer(state = initicalState, action) {
   switch (action.type) {
     case ADD:
       const newCommentObject = {
-        isLogined: true,
         userName: action.userName,
         content: action.content,
         date: currentTime(),

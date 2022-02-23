@@ -37,8 +37,9 @@ function LoginForm() {
   useEffect(() => {
     const storedUserName = JSON.parse(window.localStorage.getItem("user-name"));
     if (storedUserName) {
-      loginFunc();
+      loginFunc(storedUserName);
       setUserName(storedUserName);
+      return;
     }
   },[userName]);
 
