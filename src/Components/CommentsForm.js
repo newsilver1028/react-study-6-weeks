@@ -71,7 +71,6 @@ function CommentsForm(props) {
       userName={element.userName} 
       content={element.content} 
       date={element.date} 
-      isLogined={element.isLogined}
       key={element.date+JSON.stringify(index)}
       onClick={onClickDeleteHandler}
       />

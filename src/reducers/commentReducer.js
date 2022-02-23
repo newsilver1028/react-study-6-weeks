@@ -7,8 +7,6 @@ const DELETE = "COMMENTREDUCER/DELETE";
 const addComment = (userName, content) => ({ type: ADD, userName, content });
 const deleteComment = (target) => ({ type: DELETE, target });
 
-// const getComments = state => state.
-
 function commentReducer(state = initicalState, action) {
   switch (action.type) {
     case ADD:

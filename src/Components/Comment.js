@@ -1,15 +1,16 @@
 import { useRecoilValue } from 'recoil';
 import { userNameState } from '../State/userNameState';
+import { useSelector } from 'react-redux';
 
 import styles from './Comment.module.css';
 
 function Comment(props) {
+const { isLogined } = useSelector(state => state.loginReducer);
   const current = useRecoilValue(userNameState);
   const userName = props.userName;
   const content = props.content;
   const date = props.date;
   const onDelete = props.onClick;
-  const isLogined = props.isLogined;
   const isAuthor = isLogined && current === userName;
 
   return(
