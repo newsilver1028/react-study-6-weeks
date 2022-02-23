@@ -8,6 +8,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { addComment, deleteComment } from '../reducers/commentReducer';
 
 function CommentsForm() {
+  // 새로고침 후 아이디 가져오기
+    const getUserName = JSON.parse(window.localStorage.getItem("user-name"));
   // store에 접근하여 state 가져오기
   const { userName } = useSelector(state => state.loginReducer);
   const { isLogined } = useSelector(state => state.loginReducer);
@@ -18,7 +20,11 @@ function CommentsForm() {
   const [input, setInput] = useState("");
   const addCommentFunc = () => {
     // store에 있는 state 바꾸는 함수 실행
-    dispatch(addComment(userName,input));
+    dispatch(addComment(getUserName,input));
+  }
+
+  const deleteCommentFunc = id => {
+    dispatch(deleteComment(id));
   }
 
   // useEffect(() => {
@@ -46,8 +52,7 @@ function CommentsForm() {
   function onClickDeleteHandler(e) {
     const deleteTarget = e.target.parentNode;
     const deleteTargetId = deleteTarget.id;
-    console.log(deleteTargetId);
-    dispatch(deleteComment(deleteTargetId));
+    deleteCommentFunc(deleteTargetId);
   }
 
   const disabledCommentsForm =
@@ -68,9 +73,7 @@ function CommentsForm() {
     <div className={styles.commentsFormWrapper}>
     {comments.map((element,index) => {
       return <Comment 
-      userName={element.userName} 
-      content={element.content} 
-      date={element.date} 
+      value={element}
       key={element.date+JSON.stringify(index)}
       onDelete={onClickDeleteHandler}
       />

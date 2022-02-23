@@ -7,9 +7,7 @@ import styles from './Comment.module.css';
 function Comment(props) {
   const { isLogined } = useSelector(state => state.loginReducer);
   const current = useRecoilValue(userNameState);
-  const userName = props.userName;
-  const content = props.content;
-  const date = props.date;
+  const {userName, content, date,_} = props.value;
   const onDelete = props.onDelete;
   const isAuthor = isLogined && current === userName;
 
