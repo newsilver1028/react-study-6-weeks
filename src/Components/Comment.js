@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import styles from './Comment.module.css';
 
 function Comment(props) {
-const { isLogined } = useSelector(state => state.loginReducer);
+  const { isLogined } = useSelector(state => state.loginReducer);
   const current = useRecoilValue(userNameState);
   const userName = props.userName;
   const content = props.content;
