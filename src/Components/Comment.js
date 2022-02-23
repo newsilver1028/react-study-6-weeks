@@ -10,7 +10,7 @@ function Comment(props) {
   const userName = props.userName;
   const content = props.content;
   const date = props.date;
-  const onDelete = props.onClick;
+  const onDelete = props.onDelete;
   const isAuthor = isLogined && current === userName;
 
   return(

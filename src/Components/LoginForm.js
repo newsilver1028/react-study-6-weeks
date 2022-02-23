@@ -19,7 +19,6 @@ function LoginForm() {
   // store에 접근하여 state 가져오기
   const { userName } = useSelector(state => state.loginReducer);
   const { isLogined } = useSelector(state => state.loginReducer);
-  // reselect 적용해보기.
 
   const loginFunc = () => {
     // store에 있는 state 바꾸는 함수 실행
@@ -36,11 +35,11 @@ function LoginForm() {
 
   useEffect(() => {
     const storedUserName = JSON.parse(window.localStorage.getItem("user-name"));
-    if (storedUserName) {
-      loginFunc(storedUserName);
-      setUserName(storedUserName);
+    if (!storedUserName) {
       return;
     }
+    loginFunc(storedUserName);
+    setUserName(storedUserName);
   },[userName]);
 
   function onChangeInputHandler(e) {
@@ -52,8 +51,9 @@ function LoginForm() {
     e.preventDefault();
     if (!isLogined){
       window.localStorage.setItem("user-name", JSON.stringify(input));
-      loginFunc();
-      setUserName(getUserName);
+      console.log(input);
+      loginFunc(input);
+      setUserName(input);
       return;
     }
     localStorage.removeItem("user-name");
@@ -65,7 +65,7 @@ function LoginForm() {
   return (
     <div className={styles.loginFormWrapper}>
     <form className={styles.loginForm}>
-      {isLogined ? <h2 className={styles.loginedUser}>{userName}</h2> : inputText}
+      {isLogined ? <h2 className={styles.loginedUser}>{getUserName}</h2> : inputText}
       <button 
         type="button" 
         className={styles.submitUserName} 
@@ -73,7 +73,7 @@ function LoginForm() {
         {loginText}
       </button>
     </form>
-    <CommentsForm isLogined={isLogined} userName={userName}/>
+    <CommentsForm />
     </div>
   )
 }

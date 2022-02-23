@@ -7,7 +7,7 @@ import styles from './CommentsForm.module.css';
 import { useSelector, useDispatch } from "react-redux";
 import { addComment, deleteComment } from '../reducers/commentReducer';
 
-function CommentsForm(props) {
+function CommentsForm() {
   // store에 접근하여 state 가져오기
   const { userName } = useSelector(state => state.loginReducer);
   const { isLogined } = useSelector(state => state.loginReducer);
@@ -72,7 +72,7 @@ function CommentsForm(props) {
       content={element.content} 
       date={element.date} 
       key={element.date+JSON.stringify(index)}
-      onClick={onClickDeleteHandler}
+      onDelete={onClickDeleteHandler}
       />
     })}
     </div>
