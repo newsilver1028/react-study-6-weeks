@@ -9,7 +9,7 @@ import { addComment, deleteComment } from '../reducers/commentReducer';
 
 function CommentsForm() {
   // 새로고침 후 아이디 가져오기
-    const getUserName = JSON.parse(window.localStorage.getItem("user-name"));
+  const getUserName = JSON.parse(window.localStorage.getItem("user-name"));
   // store에 접근하여 state 가져오기
   const { userName } = useSelector(state => state.loginReducer);
   const { isLogined } = useSelector(state => state.loginReducer);
