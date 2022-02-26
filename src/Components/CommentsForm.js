@@ -7,6 +7,8 @@ import styles from './CommentsForm.module.css';
 import { useSelector, useDispatch } from "react-redux";
 import { addComment, deleteComment } from '../reducers/commentReducer';
 
+import { deleteAsync } from '../Selector/selector';
+
 function CommentsForm() {
   // 새로고침 후 아이디 가져오기
   const getUserName = JSON.parse(window.localStorage.getItem("user-name"));
