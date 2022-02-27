@@ -1,30 +1,75 @@
+import { createAction, createReducer, createSlice } from '@reduxjs/toolkit';
 import { currentTime } from '../Function/currentTime';
 
 const initicalState = [];
 const ADD = "COMMENTREDUCER/ADD";
 const DELETE = "COMMENTREDUCER/DELETE";
 
-const addComment = (userName, content) => ({ type: ADD, userName, content });
-const deleteComment = (target) => ({ type: DELETE, target });
+// const addComment = (userName, content) => ({ type: ADD, userName, content });
+// const deleteComment = (target) => ({ type: DELETE, target });
+export const addComment = createAction(ADD, saveData => saveData);
+export const deleteComment = createAction(DELETE, target => target);
 
-function commentReducer(state = initicalState, action) {
-  switch (action.type) {
-    case ADD:
-      const newCommentObject = {
-        userName: action.userName,
-        content: action.content,
+// function commentReducer(state = initicalState, action) {
+//   switch (action.type) {
+//     case ADD:
+//       const [userName, content] = action.saveData;
+//       const newCommentObject = {
+//         userName: userName,
+//         content: content,
+//         date: currentTime(),
+//         id: `${action.userName+currentTime()}`
+//       }
+//       const commentsArray = [...state, newCommentObject];
+//       return commentsArray;
+//     case DELETE:
+//       const deletedArray = state.filter(comment => comment.id !== action.target);
+//       return deletedArray;
+//     default:
+//       return state;
+//   }
+// }
+
+export default createReducer(initicalState, {
+  Add: (state, { payload: saveData }) => {
+    const [userName, content] = saveData;
+     const newCommentObject = {
+        userName: userName,
+        content: content,
         date: currentTime(),
-        id: `${action.userName+currentTime()}`
+        id: `${userName+currentTime()}`
+      }
+      const commentsArray = [...state, newCommentObject];
+    return commentsArray;
+  },
+  DELETE: (state, { payload: target}) => {
+    const deletedArray = state.filter(comment => comment.id !== target);
+    return deletedArray;
+  }
+})
+
+export const commentReducer = createSlice({
+  name: 'commentReducer',
+  initialState: initicalState,
+  reducers: {
+    Add: (state, { payload: saveData }) => {
+      const [userName, content] = saveData;
+      const newCommentObject = {
+        userName: userName,
+        content: content,
+        date: currentTime(),
+        id: `${userName+currentTime()}`
       }
       const commentsArray = [...state, newCommentObject];
       return commentsArray;
-    case DELETE:
-      const deletedArray = state.filter(comment => comment.id !== action.target);
+    },
+    DELETE: (state, { payload: target}) => {
+      const deletedArray = state.filter(comment => comment.id !== target);
       return deletedArray;
-    default:
-      return state;
+    }
   }
-  // default 대신 오류를 반환해야함.
-}
+});
 
-export { commentReducer, addComment, ADD, deleteComment, DELETE };
+export { ADD, DELETE };
+
+// export { commentReducer };

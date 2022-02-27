@@ -7,7 +7,7 @@ import styles from './CommentsForm.module.css';
 import { useSelector, useDispatch } from "react-redux";
 import { addComment, deleteComment } from '../reducers/commentReducer';
 
-import { deleteAsync } from '../Selector/selector';
+import { createReducer } from '../reducers/commentReducer';
 
 function CommentsForm() {
   // 새로고침 후 아이디 가져오기
@@ -20,11 +20,14 @@ function CommentsForm() {
   const dispatch = useDispatch();
 
   const [input, setInput] = useState("");
-  const addCommentFunc = () => {
-    // store에 있는 state 바꾸는 함수 실행
-    dispatch(addComment(getUserName,input));
-  }
+  // const addCommentFunc = () => {
+  //   // store에 있는 state 바꾸는 함수 실행
+  //   dispatch(addComment([getUserName,input]));
+  // }
 
+  const addCommentFunc = (saveData) => {
+    dispatch(addComment(saveData));
+  }
   const deleteCommentFunc = id => {
     dispatch(deleteComment(id));
   }
@@ -48,7 +51,7 @@ function CommentsForm() {
 
   function onClickSubmitHandler(e) {
     e.preventDefault();
-    addCommentFunc();
+    addCommentFunc([getUserName,input]);
   }
 
   function onClickDeleteHandler(e) {
@@ -73,7 +76,7 @@ function CommentsForm() {
     <>
     {isLogined ? abledCommentsForm : disabledCommentsForm}
     <div className={styles.commentsFormWrapper}>
-    {comments.map((element,index) => {
+    {comments && comments.map((element,index) => {
       return <Comment 
       value={element}
       key={element.date+JSON.stringify(index)}
