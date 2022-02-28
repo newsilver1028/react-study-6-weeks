@@ -19,8 +19,8 @@ const enhancer =
     : composeWithDevTools(applyMiddleware(logger,ReduxThunk));
 
 // 위에서 만든 reducer를 스토어 만들때 넣어줍니다
-// const store = createStore(rootReducer, enhancer);
-const store = configureStore({ reducer: rootReducer })
+const store = createStore(rootReducer, enhancer);
+// const store = configureStore({ reducer: rootReducer })
 
 ReactDOM.render(
   <Provider store={store}>
